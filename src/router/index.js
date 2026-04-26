@@ -12,6 +12,11 @@ const router = createRouter({
             name: 'Landing Page',
             component: () => import('../pages/Landing.vue'),
         },
+        {
+            path: '/test',
+            name: 'Scroll Page',
+            component: () => import('../pages/ScrollPage.vue'),
+        },
     ]
 })
 

@@ -32,7 +32,7 @@
         </div>
     </section> -->
 
-    <div class="h-[15dvh] bg-[#100E09] text-white flex justify-center items-center">
+    <div class="h-[15dvh] text-white flex justify-center items-center">
         <p class="text-sm">&copy; 2026 Depri Andiyanto. All rights reserved.</p>
     </div>
 </template>

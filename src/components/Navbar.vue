@@ -58,13 +58,15 @@
         </div>
     </div> -->
 
-    <nav class="fixed top-0 left-0 z-50 h-[15dvh] w-full grid grid-cols-12 bg-[#100E09]/10 backdrop-blur-md">
-        <div class="col-start-2 col-span-10 flex items-center justify-between">
-            <p class="font-display text-white text-3xl font-extrabold tracking-tight inline-block scale-x-110">
+    <nav class="fixed top-0 left-0 z-50 h-[9dvh] md:h-[15dvh] w-full grid grid-cols-12 backdrop-blur-md" :class="themeClass">
+        <div class="col-start-2 col-span-10 flex items-center justify-between px-2">
+            <p class="font-display text-xl md:text-3xl font-extrabold tracking-tight inline-block scale-105 md:scale-x-110">
                 depri<span class="text-transparent stroke-text">andiy</span>
             </p>
-            <div>
-                <p>dark/light mode</p>
+            <div class="flex justify-center items-center">
+                <!-- <img src="../assets/icon/globe-white.png" alt="Mode" class="w-[45%] cursor-pointer hover:w-[50%] transition-all ease-in-out duration-200" /> -->
+                <img :src="isDark ? '/src/assets/icon/sun.png' : '/src/assets/icon/night.png'" alt="Mode" @click="toggleMode"
+                class="w-[45%] cursor-pointer transition-all ease-in-out duration-200 hover:scale-110 active:scale-95" />
             </div>
         </div>
     </nav>
@@ -72,14 +74,23 @@
 
 <script setup>
 // import
-import Button from 'primevue/button';
-import { onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import Button from 'primevue/button';
 
 // variable
 const router = useRouter();
+// const isDark = ref(true);
+const emit = defineEmits(['toggle']);
+const props = defineProps({
+    isDark: Boolean
+});
 
 // method
+const toggleMode = () => {
+    emit('toggle');
+};
+
 const scrollOrRedirect = (className, fallbackPath) => {
     const currentPath = window.location.pathname;
 
@@ -95,13 +106,16 @@ const toHero = () => scrollOrRedirect("_my-hero", "/home");
 const toProject = () => scrollOrRedirect("_my-projects", "/projects");
 const toContact = () => scrollOrRedirect("_contact-me", "/contact-me");
 
-// socket
-//
-
 // onMounted
 onMounted(() => {
     console.log('');
 });
+
+const themeClass = computed(() => 
+    props.isDark 
+        ? 'bg-[#100E09]/10 text-white' 
+        : 'bg-white/10 text-black'
+);
 </script>
 
 <style>
